@@ -1,0 +1,394 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Urbanist', system-ui, -apple-system, sans-serif;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fcfcfc;
+  color: #09090b;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbars ─────────────────────────────────────────────────────────── */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.4);
+}
+
+/* ── Dot loader ─────────────────────────────────────────────────────────── */
+.dot-loader {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.dot-loader span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6366f1;
+  animation: dot-pulse 1.4s ease-in-out infinite;
+}
+
+.dot-loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot-loader span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-pulse {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0.75);
+    opacity: 0.3;
+  }
+
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   BUILDER LAYOUT
+══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Desktop ───────────────────────────────────────────────────────────── */
+.builder-layout {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Sidebar */
+.builder-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  min-width: 280px;
+  max-width: 280px;
+  height: 100%;
+  background: rgba(8, 8, 16, 0.72) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Sidebar tab strip */
+.builder-sidebar-tabs {
+  display: flex;
+  align-items: stretch;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 0 6px;
+  gap: 2px;
+}
+
+.builder-sidebar-tabs button {
+  border-radius: 6px 6px 0 0;
+  letter-spacing: 0.02em;
+  transition: color 0.15s, background 0.15s;
+  padding: 0 12px;
+}
+
+/* Sidebar scrollable content area */
+.builder-sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.2) transparent;
+}
+
+.builder-sidebar-content::-webkit-scrollbar {
+  width: 3px;
+}
+
+.builder-sidebar-content::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.22);
+  border-radius: 9999px;
+}
+
+/* Preview area wrapper */
+.builder-preview-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  /* Separator line */
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Indigo top-glow accent on preview area */
+.builder-preview-area::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(99, 102, 241, 0.5) 30%,
+      rgba(139, 92, 246, 0.35) 60%,
+      transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Mobile (< 768px) ───────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .builder-layout {
+    flex-direction: column;
+  }
+
+  .builder-sidebar {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  .builder-preview-area {
+    display: none !important;
+  }
+
+  /* Collapse header button labels on mobile */
+  .builder-header-btn-label {
+    display: none;
+  }
+
+  .auth-page-wrapper {
+    background: linear-gradient(135deg, #0f0f14 0%, #13131a 50%, #0d1117 100%) !important;
+  }
+}
+
+/* ── Tablet (768px – 1023px) ────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .builder-sidebar {
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SANDPACK — DARK THEME OVERRIDES
+══════════════════════════════════════════════════════════════════════════ */
+
+.sp-wrapper {
+  border-radius: 0 !important;
+  border: none !important;
+  height: 100% !important;
+  background: transparent !important;
+}
+
+.sp-layout {
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  height: 100% !important;
+}
+
+/* ── Code editor ────────────────────────────────────────────────────────── */
+.sp-code-editor {
+  height: 100% !important;
+  background: #0a0a10 !important;
+}
+
+/* Gutter + line numbers */
+.sp-cm .cm-gutters {
+  background: #0a0a10 !important;
+  border-right: 1px solid rgba(99, 102, 241, 0.12) !important;
+}
+
+.sp-cm .cm-lineNumbers .cm-gutterElement {
+  color: rgba(99, 102, 241, 0.28) !important;
+  font-size: 11px !important;
+  min-width: 40px !important;
+  padding-right: 12px !important;
+  user-select: none;
+}
+
+/* Active line */
+.sp-cm .cm-activeLine {
+  background: rgba(255, 255, 255, 0.025) !important;
+}
+
+.sp-cm .cm-activeLineGutter {
+  background: rgba(99, 102, 241, 0.07) !important;
+  color: rgba(99, 102, 241, 0.55) !important;
+}
+
+/* Selection & cursor */
+.sp-cm .cm-selectionBackground,
+.sp-cm .cm-focused .cm-selectionBackground {
+  background: rgba(99, 102, 241, 0.2) !important;
+}
+
+.sp-cm .cm-cursor {
+  border-left: 2px solid #6366f1 !important;
+}
+
+/* Scrollbars inside editor */
+.sp-code-editor ::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.sp-code-editor ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sp-code-editor ::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.25);
+  border-radius: 9999px;
+}
+
+.sp-code-editor ::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
+
+/* ── Tab bar ────────────────────────────────────────────────────────────── */
+.sp-tabs {
+  background: #0d0d14 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 0 6px !important;
+  min-height: 36px !important;
+}
+
+.sp-tab-button {
+  color: rgba(161, 161, 170, 0.45) !important;
+  font-size: 11px !important;
+  border-radius: 4px 4px 0 0 !important;
+  transition: color 0.15s, background 0.15s !important;
+  padding: 6px 12px !important;
+  border-bottom: 2px solid transparent !important;
+}
+
+.sp-tab-button:hover {
+  color: #c4c4cc !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.sp-tab-button[data-active='true'] {
+  color: #a5b4fc !important;
+  background: rgba(99, 102, 241, 0.08) !important;
+  border-bottom: 2px solid #6366f1 !important;
+}
+
+/* ── Preview pane ───────────────────────────────────────────────────────── */
+.sp-preview {
+  height: 100% !important;
+  background: #fff !important;
+}
+
+.sp-preview-iframe {
+  height: 100% !important;
+  animation: preview-fadein 0.3s ease;
+}
+
+@keyframes preview-fadein {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sp-preview-loading {
+  background: #0a0a10 !important;
+}
+
+/* ── Error overlay ──────────────────────────────────────────────────────── */
+.sp-error-message {
+  background: rgba(20, 8, 8, 0.96) !important;
+  color: #f87171 !important;
+  border: 1px solid rgba(248, 113, 113, 0.18) !important;
+  border-radius: 10px !important;
+  backdrop-filter: blur(12px) !important;
+  font-size: 12px !important;
+  line-height: 1.6 !important;
+  font-family: 'Geist Mono', ui-monospace, monospace !important;
+}
+
+/* Status bar */
+.sp-status-bar {
+  background: #0a0a10 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
+  color: rgba(161, 161, 170, 0.35) !important;
+  font-size: 10px !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   HOME PAGE — MARQUEE
+══════════════════════════════════════════════════════════════════════════ */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.masked-marquee {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
