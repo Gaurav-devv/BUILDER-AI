@@ -20,7 +20,7 @@ load_dotenv()
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL", "llama3.2:3b")
+OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL", "qwen3:8b")
 OLLAMA_TIMEOUT  = float(os.getenv("OLLAMA_TIMEOUT_MS", "90000")) / 1000
 MAX_PROMPT_LEN  = int(os.getenv("MAX_PROMPT_LEN", "8000"))
 

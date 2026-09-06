@@ -15,7 +15,7 @@ if errorlevel 1 (
     echo  Please start Ollama first, then re-run this script.
     echo  Commands to run in a separate terminal:
     echo    ollama serve
-    echo    ollama pull llama3.2:3b
+    echo    ollama pull qwen3:8b
     echo.
 )
 
