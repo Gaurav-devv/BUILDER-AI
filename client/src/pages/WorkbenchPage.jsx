@@ -276,7 +276,7 @@ const WorkbenchPage = () => {
                           <WifiOffIcon size={13} className="shrink-0 mt-0.5" />
                           <span>
                             Local AI is offline. Start Ollama and make sure your model is pulled.<br />
-                            <code className="text-red-300 text-[10px]">ollama pull llama3.2:3b</code>
+                            <code className="text-red-300 text-[10px]">ollama pull qwen3:8b</code>
                           </span>
                         </div>
                       )}
