@@ -7,6 +7,7 @@ import authRouter from "./routes/authRoutes.js";
 import projectRouter from "./routes/projectRoutes.js";
 import dns from "dns";
 
+
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 const app = express();
@@ -85,4 +86,4 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
   console.log(`Allowed CORS origins:`, startupOriginList);
-});
+});

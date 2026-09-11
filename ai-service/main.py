@@ -104,6 +104,7 @@ async def call_ollama(prompt: str, system: Optional[str] = None) -> str:
         "model": OLLAMA_MODEL,
         "prompt": prompt,
         "stream": False,
+        "think": False, 
     }
     if system:
         payload["system"] = system
